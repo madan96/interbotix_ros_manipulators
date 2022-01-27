@@ -13,20 +13,16 @@ from interbotix_perception_modules.pointcloud import InterbotixPointCloudInterfa
 
 def main():
     # Initialize the arm module along with the pointcloud and armtag modules
-    bot = InterbotixManipulatorXS("wx200", moving_time=1.5, accel_time=0.75)
+    bot = InterbotixManipulatorXS("wx250s", moving_time=1.5, accel_time=0.75)
     pcl = InterbotixPointCloudInterface()
     armtag = InterbotixArmTagInterface()
 
-    # set initial arm and gripper pose
-    bot.arm.set_ee_pose_components(x=0.3, z=0.2)
+    # set gripper pose
     bot.gripper.open()
 
     # get the ArmTag pose
-    bot.arm.set_ee_pose_components(y=-0.3, z=0.2)
-    time.sleep(0.5)
     armtag.find_ref_to_arm_base_transform()
-    bot.arm.set_ee_pose_components(x=0.3, z=0.2)
-
+    
     # get the cluster positions
     # sort them from max to min 'x' position w.r.t. the 'wx200/base_link' frame
     success, clusters = pcl.get_cluster_positions(ref_frame="wx200/base_link", sort_axis="x", reverse=True)
