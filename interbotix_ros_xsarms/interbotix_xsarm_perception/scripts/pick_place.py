@@ -24,8 +24,8 @@ def main():
     armtag.find_ref_to_arm_base_transform()
     
     # get the cluster positions
-    # sort them from max to min 'x' position w.r.t. the 'wx200/base_link' frame
-    success, clusters = pcl.get_cluster_positions(ref_frame="wx200/base_link", sort_axis="x", reverse=True)
+    # sort them from max to min 'x' position w.r.t. the 'wx250s/base_link' frame
+    success, clusters = pcl.get_cluster_positions(ref_frame="wx250s/base_link", sort_axis="x", reverse=True)
 
     # pick up all the objects and drop them in a virtual basket in front of the robot
     for cluster in clusters:
